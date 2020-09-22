@@ -9,6 +9,9 @@ def getTotals(typ, dict):
     dict=dict['data']
     for x in dict:
         if typ in x.values():
-            
+            total_cost+=x.get('cost')
+            total_amount+=x.get('amount')
+    
+    print('{ "total_cost": ', total_cost,', "total_amount": ',total_amount,' }')
 
-getTotals('A',data_json)
+getTotals('B',data_json)
