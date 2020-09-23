@@ -1,17 +1,16 @@
 import json
+import pprint
 
-with open('12.json') as f:
-  data_json = json.load(f)
-
-def getItems(X, dict):
-    obj={}
-   
-    dict=dict['data']
+def getItems(X):
+  with open('12.json') as f:
+    data_json = json.load(f)
+    obj=[]
+    dict=data_json['data']
     for x in dict:
-        if x.get('amount') < X:
-            obj.update(x)
+        if X > x.get('amount'):
+            obj.append(x)
+    pprint.pprint(json.dumps(obj))         
 
-    new_json= json.dumps(obj)
-    print(new_json)
-
-getItems(5, data_json)
+getItems(5)
+#getItems(10)
+#getItems(15)

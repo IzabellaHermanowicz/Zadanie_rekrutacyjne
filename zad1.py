@@ -1,12 +1,11 @@
 import json
 
-with open('12.json') as f:
-  data_json = json.load(f)
-
-def getTotals(typ, dict):
+def getTotals(typ):
+  with open('12.json') as f:
+    data_json = json.load(f)
     total_cost = 0
     total_amount = 0
-    dict=dict['data']
+    dict=data_json['data']
     for x in dict:
         if typ in x.values():
             total_cost+=x.get('cost')
@@ -14,4 +13,6 @@ def getTotals(typ, dict):
     
     print('{ "total_cost": ', total_cost,', "total_amount": ',total_amount,' }')
 
-getTotals('B',data_json)
+getTotals('A')
+getTotals('B')
+getTotals('C')
