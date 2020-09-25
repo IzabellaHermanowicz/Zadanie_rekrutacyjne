@@ -1,5 +1,9 @@
 from typing import Optional
 from fastapi import FastAPI
+import csv
+import json
+
+json_data = [json.dumps(d) for d in csv.DictReader(open('tags.csv'))]
 
 app = FastAPI()
 
@@ -10,5 +14,3 @@ def read_root():
 @app.get("/api/scan")
 
 @app.post("/api/results")
-def read_item(item_id: int, q: Optional[str] = None):
-    return {"item_id": item_id, "q": q}
