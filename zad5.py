@@ -1,23 +1,17 @@
 from pymodbus.client.sync import ModbusTcpClient
-import http.server
-import socketserver
+from fastapi import FastAPI, Response, status
 
-address = 200 
-value = 1
-unitId = 1
-host = "127.0.0.1"
-PORT = 5020
-Handler = http.server.SimpleHTTPRequestHandler
+app = FastAPI()
 
-with socketserver.TCPServer(("", PORT), Handler) as httpd:
-    client = ModbusTcpClient(host, PORT)
-    client.connect()
-    client.write_register(address,value,unit=unitId)
-    httpd.serve_forever()
+@app.post("/api/open", status_code=200)
+def open(response: Response):
+    try:
+        client = ModbusTcpClient(host='192.168.1.15', port='5020')
+        client.connect()
+        client.write_registers(200, 1)
+    except:
+        response.status_code = status.HTTP_404_NOT_FOUND
+        return{"status":"Door closed"}
+    return {"status":"Door opened"}
 
-.put("/api/open")
-    def funcname(parameter_list):
-        """
-        docstring
-        """
-        pass
+
