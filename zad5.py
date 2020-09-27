@@ -14,3 +14,10 @@ with socketserver.TCPServer(("", PORT), Handler) as httpd:
     client.connect()
     client.write_register(address,value,unit=unitId)
     httpd.serve_forever()
+
+.put("/api/open")
+    def funcname(parameter_list):
+        """
+        docstring
+        """
+        pass
